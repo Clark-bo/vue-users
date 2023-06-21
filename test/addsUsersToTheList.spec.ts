@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 test('test', async ({ page }) => {
   await page.goto('http://localhost:5173/');
@@ -19,4 +19,5 @@ test('test', async ({ page }) => {
   await page.getByLabel('Surname:').fill('Alcantara');
   await page.getByRole('combobox', { name: 'Gender:' }).selectOption('Male');
   await page.getByRole('button', { name: 'Add/Edit User' }).click();
+  await expect(page).toHaveURL('http://localhost:5173/');
 });

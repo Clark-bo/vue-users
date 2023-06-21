@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 test('test', async ({ page }) => {
   await page.goto('http://localhost:5173/');
@@ -20,4 +20,5 @@ test('test', async ({ page }) => {
   await page.getByLabel('Forename:').dblclick();
   await page.getByLabel('Forename:').fill('Clark');
   await page.getByRole('button', { name: 'Add/Edit User' }).click();
+  expect(page).toBeEditable('');
 });
