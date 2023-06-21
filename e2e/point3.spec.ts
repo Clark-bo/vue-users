@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('test', async ({ page }) => {
+test('hasFieldsToAddEditUsers', async ({ page }) => {
   await page.goto('http://localhost:5173/');
   await page.getByLabel('Email:').click();
   await page.getByLabel('Forename:').click();

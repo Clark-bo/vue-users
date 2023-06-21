@@ -19,7 +19,12 @@ test('addsAndUpdatesAuserInTheList', async ({ page }) => {
   await page.getByRole('row', { name: 'carlos15@pemex.com Carlos Santos Male Edit Delete' }).getByRole('button', { name: 'Edit' }).click();
   await page.getByLabel('Forename:').dblclick();
   await page.getByLabel('Forename:').fill('Clark');
-  await page.getByRole('button', { name: 'Add/Edit User' }).click();
-  const softExpect = expect.configure({ soft: true });
-  await softExpect(page).toBeDefined();
+  
+  const emailValue = await page.$eval('#users-table tbody tr td[data-label="Email"]', element => element.textContent);
+  const forenameValue = await page.$eval('#users-table tbody tr td[data-label="Forename"]', element => element.textContent);
+  const surnameValue = await page.$eval('#users-table tbody tr td[data-label="Surname"]', element => element.textContent);
+  
+  expect(emailValue).toBe('carlos15@pemex.com');
+  expect(forenameValue).toBe('Clark');
+  expect(surnameValue).toBe('Santos');
 });

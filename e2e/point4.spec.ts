@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
+import { toHaveTextContent } from '@playwright/test';
 
-test('test', async ({ page }) => {
+test('addUsersToTheList', async ({ page }) => {
   await page.goto('http://localhost:5173/');
   await page.getByLabel('Email:').click();
   await page.getByLabel('Email:').press('CapsLock');
@@ -19,5 +20,5 @@ test('test', async ({ page }) => {
   await page.getByLabel('Surname:').fill('Alcantara');
   await page.getByRole('combobox', { name: 'Gender:' }).selectOption('Male');
   await page.getByRole('button', { name: 'Add/Edit User' }).click();
-  await expect(page).toHaveURL('http://localhost:5173/');
+  expect(page).toHaveTextContent(/User successfully added/);
 });
