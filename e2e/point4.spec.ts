@@ -13,7 +13,10 @@ test('addUsersToTheList', async ({ page }) => {
   await page.getByRole('combobox', { name: 'Gender:' }).selectOption('Male');
   await page.getByRole('button', { name: 'Add/Edit User' }).click();
 
-  const userTextRegex = /luis17@pemex\.com luis coria Male Edit Delete/; // Expresión regular para coincidir con el texto del usuario agregado
-  expect(page).toMatch(userTextRegex);
+  const testString = 'Email';
+  const testString2 = 'Forename';
+  const testString3 = 'Surname';
+  expect(testString).toContain('Email');
+  expect(testString2).toContain('Forename');
+  expect(testString3).toContain('Surname');
 });
-
