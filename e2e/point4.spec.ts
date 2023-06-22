@@ -1,24 +1,19 @@
 import { test, expect } from '@playwright/test';
-import { toHaveTextContent } from '@playwright/test';
 
 test('addUsersToTheList', async ({ page }) => {
   await page.goto('http://localhost:5173/');
+  await page.waitForLoadState('networkidle');
+
   await page.getByLabel('Email:').click();
-  await page.getByLabel('Email:').press('CapsLock');
-  await page.getByLabel('Email:').fill('L');
-  await page.getByLabel('Email:').press('CapsLock');
-  await page.getByLabel('Email:').fill('Luis15@pemex.com');
+  await page.getByLabel('Email:').fill('luis17@pemex.com');
   await page.getByLabel('Forename:').click();
-  await page.getByLabel('Forename:').press('CapsLock');
-  await page.getByLabel('Forename:').fill('L');
-  await page.getByLabel('Forename:').press('CapsLock');
-  await page.getByLabel('Forename:').fill('Luis');
+  await page.getByLabel('Forename:').fill('luis');
   await page.getByLabel('Surname:').click();
-  await page.getByLabel('Surname:').press('CapsLock');
-  await page.getByLabel('Surname:').fill('A');
-  await page.getByLabel('Surname:').press('CapsLock');
-  await page.getByLabel('Surname:').fill('Alcantara');
+  await page.getByLabel('Surname:').fill('coria');
   await page.getByRole('combobox', { name: 'Gender:' }).selectOption('Male');
   await page.getByRole('button', { name: 'Add/Edit User' }).click();
-  expect(page).toHaveTextContent(/User successfully added/);
+
+  const userTextRegex = /luis17@pemex\.com luis coria Male Edit Delete/; // Expresión regular para coincidir con el texto del usuario agregado
+  expect(page).toMatch(userTextRegex);
 });
+
